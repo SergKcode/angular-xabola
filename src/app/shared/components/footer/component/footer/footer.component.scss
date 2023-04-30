@@ -1,0 +1,91 @@
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$dark-color: #343a40;
+$light-color: #f8f9fa;
+$medium-color: #212529; 
+
+// Estilos del footer
+.logos{
+  height: 40px;
+  width: 40px;
+  margin:0 10px;
+}
+.footer {
+  display: block;
+  max-height: 300px;
+  background-color: $dark-color;
+  color: $light-color;
+  padding: 20px 0;
+  text-align: center;
+
+  &__info{
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    padding: 10px 30px;
+  }
+
+  &__container{
+    display: flex;
+    flex-direction: row;
+    
+  }
+  h4 {
+    color: #f8f9fa;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    margin-bottom: 30px;
+    list-style: none;
+
+    li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-right: 10px;
+      }
+
+      a {
+        color: $light-color;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    li {
+      margin-right: 20px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      a {
+        color: $light-color;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: $primary-color;
+        }
+
+        i {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}
