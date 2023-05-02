@@ -1,57 +1,64 @@
 <section class="customization">
     <div class="customization__container">
-      <div class="badge__container">
-          <div class="badge__list">
-          
-      
-          </div>
-          <div class="badge__summary">
-          
-            <ul>
-                <li>
-                    <div class="element-selected__container">
-                        <div class="element-selected__info">
-                            <h2 class="element-selected__type"></h2>
-                            <h3 class="element-selected__name"></h3>
-                            <h3 class="element-selected__detail"></h3>
-                        </div>
-                        <div class="element-selected__cost">
-                            <span>EUR</span>
-                            <h3 class="element-selected__price"></h3>
-                        </div>
-                 
+        <div class="badge__container">
+            <h1 class="badge__title">Resumen de seleccion</h1>
+
+            <ul class="badge__list">
+                <li class="badge__item">
+                    <div class="badge__item__description">
+                        <h2 class="badge__item__name">Xabola S</h2>
+                        <h3 class="badge__item__type">Modulos</h3>
                     </div>
-                 
+                    <div class="badge__item__detail-price">
+                        <span class="badge__item__currency">EUR</span>
+                        <h3 class="badge__item__amount">40000</h3>
+                    </div>
                 </li>
             </ul>
-      
-          </div>
-          <div class="badge__cancel">
-              <button></button>
-      
-          </div>
-          <div class="badge__contact">
-            <button></button>
-      
-          </div>
-          
-      
-      </div>
-  
-      <div class="selection__container">
-          <div class="stepper">
-          
-          
-      
-          </div>
-          <div class="selection__container">
-          //lista o select
-      
-          </div>
-          
-      
-      </div>
-  
+
+
+
+            <div class="badge__summary">
+                <div class="badge__summary__total" >
+                    <h1 class="badge__summary__total__title">Total</h1>
+                </div>
+                <div class="badge__summary__cost"> 
+                    <span class="badge__summary__currency">EUR</span>
+                    <h3 class="badge__summary__amount">0</h3>
+                </div>
+            </div>
+            <div class="badge__actions">
+                <button class="button--cancel"></button>
+
+
+                <button class="button--next"></button>
+
+            </div>
+
+
+        </div>
+
+        <div class="selection__container">
+            <div class="stepper">
+                <app-stepper></app-stepper>
+            </div>
+            <div class="selection__list">
+
+                <app-product-card></app-product-card>
+
+            </div>
+
+            <div class="selection__actions">
+                <button class="button--cancel"></button>
+
+                <button class="button--next"></button>
+
+
+            </div>
+
+
+        </div>
+
     </div>
-  </section>
-  <!-- https://codepen.io/steveschoger/pen/YbQXGq -->
+</section>
+<!-- https://codepen.io/steveschoger/pen/YbQXGq -->
