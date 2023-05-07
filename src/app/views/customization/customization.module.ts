@@ -7,6 +7,8 @@ import { appReducer } from 'src/app/redux/app.reducer';
 import { CustomizationRoutingModule } from './customization-routing.module';
 import { StepperModule } from 'src/app/shared/components/stepper/stepper.module';
 import { ProductCardModule } from 'src/app/shared/components/product-card/product-card.module';
+import { AbstractCustomizationService } from './service/abstract-customization.service';
+import { CustomizationServiceModule } from './service/customization.service.module';
 
 
 
@@ -19,7 +21,8 @@ import { ProductCardModule } from 'src/app/shared/components/product-card/produc
     CustomizationRoutingModule,
     StoreModule.forFeature(appFeatureKey,appReducer),
     StepperModule,
-    ProductCardModule
+    ProductCardModule,
+    CustomizationServiceModule
   ]
 })
 export class CustomizationModule { }

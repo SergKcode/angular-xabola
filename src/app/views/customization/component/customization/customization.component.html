@@ -3,7 +3,7 @@
         <div class="badge__container">
             <h1 class="badge__title">Resumen de seleccion</h1>
 
-            <ul class="badge__list">
+            <ul class="badge__list" *ngIf="listOfSelectables$ |async">
                 <li class="badge__item">
                     <div class="badge__item__description">
                         <h2 class="badge__item__name">Xabola S</h2>

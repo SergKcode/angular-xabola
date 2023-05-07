@@ -45,6 +45,6 @@ export class CustomizationService implements AbstractCustomizationService {
 	 *
 	 */
 	getExtrasByType(type: string): Observable<any> {
-		return this._httpClient.get<any>(`${environment.baseUrl}/extras/${type}`);
+		return this._httpClient.get<any>(`${environment.baseUrl}/extras/type/${type}`);
 	}
 }
