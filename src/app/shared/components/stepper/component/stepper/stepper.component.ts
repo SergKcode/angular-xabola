@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-stepper',
@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./stepper.component.scss']
 })
 export class StepperComponent {
+  @Input() step:number = 1
+  stepperPercentage:string= 'w-1/3'
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  
 
 }

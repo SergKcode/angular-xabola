@@ -1,13 +1,12 @@
+import { HouseElementsTypes } from '../shared/model/shared.model';
+import { Container, Extra, Product } from '../views/customization/model/customization.model';
 
-import { GenericObject } from "../shared/model/shared.model";
-
-export const appFeatureKey = 'app'
+export const appFeatureKey = 'app';
 
 export interface AppState {
-    customizationSelection: GenericObject;
-    isAdmin: boolean
+	customizationSelection?: Product;
+	isAdmin: boolean;
 }
 export const initialAppState: AppState = {
-    customizationSelection: {},
-    isAdmin: false
-} 
+	isAdmin: false
+};

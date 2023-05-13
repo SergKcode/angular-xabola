@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { GenericObject } from "../shared/model/shared.model";
+import { Container, Extra, Product } from "../views/customization/model/customization.model";
 
 export enum AppActions {
     SAVE_CUSTOM_SELECTION = '[APP STATE]: Saving App customization selection',
@@ -19,7 +19,7 @@ export enum AppActionsError {
 /**
  * 
  */
-export const saveCustomSelection = createAction(AppActions.SAVE_CUSTOM_SELECTION, props<{ customizationSelection: GenericObject }>())
+export const saveCustomSelection = createAction(AppActions.SAVE_CUSTOM_SELECTION, props<{ customizationSelection:Product}>())
 /**
  * 
  */

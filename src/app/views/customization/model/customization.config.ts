@@ -1,9 +1,17 @@
-import { CustomizationTypes } from './customization.model';
+import { HouseElementsTypes } from 'src/app/shared/model/shared.model';
 
 export const CUSTOMIZATION_LIST_VIEW_CONFIG = [
-	{ order: 1, type: CustomizationTypes.CONTAINERS },
-	{ order: 2, type: CustomizationTypes.EXTERIOR },
-	{ order: 3, type: CustomizationTypes.INTERIOR },
-	{ order: 4, type: CustomizationTypes.EQUIPAMIENTO },
-	{ order: 5, type: CustomizationTypes.AUTOSUFICIENCIA }
+	{ order: 1, type: HouseElementsTypes.CONTAINERS },
+	{ order: 2, type: HouseElementsTypes.EXTERIOR },
+	{ order: 3, type: HouseElementsTypes.INTERIOR },
+	{ order: 4, type: HouseElementsTypes.EQUIPAMIENTO },
+	{ order: 5, type: HouseElementsTypes.AUTOSUFICIENCIA }
 ];
+
+export const MODULE_LITERAL = {
+	CO: 'Modulo',
+	EX: 'Exterior',
+	IN: 'Interior',
+	EQ: 'Equipamiento',
+	AT: 'Autosuficiencia'
+};

@@ -15,3 +15,11 @@ export enum AppRoutes{
 export interface GenericObject{
     [key:string]:any
 }
+
+export enum HouseElementsTypes{
+    CONTAINERS= 'CO',
+    EXTERIOR='EX',
+    INTERIOR='IN',
+    EQUIPAMIENTO='EQ',
+    AUTOSUFICIENCIA='AT'
+}

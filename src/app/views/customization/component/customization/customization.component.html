@@ -1,64 +1,55 @@
 <section class="customization">
-    <div class="customization__container">
-        <div class="badge__container">
-            <h1 class="badge__title">Resumen de seleccion</h1>
+	<div class="customization__container">
+		
+			<div class="badge__container">
+                <ng-container *ngIf="(houseElementsSelected$ | async )?.length">
+				<h1 class="badge__title">Resumen de seleccion</h1>
 
-            <ul class="badge__list" *ngIf="listOfSelectables$ |async">
-                <li class="badge__item">
-                    <div class="badge__item__description">
-                        <h2 class="badge__item__name">Xabola S</h2>
-                        <h3 class="badge__item__type">Modulos</h3>
-                    </div>
-                    <div class="badge__item__detail-price">
-                        <span class="badge__item__currency">EUR</span>
-                        <h3 class="badge__item__amount">40000</h3>
-                    </div>
-                </li>
-            </ul>
+				<ul class="badge__list" *ngFor="let element of houseElementsSelected$ | async">
+					<li class="badge__item">
+						<div class="badge__item__description">
+							<h2 class="badge__item__name">{{ element['name'] }}</h2>
+							<h3 class="badge__item__type">{{ element['description'] }}</h3>
+						</div>
+						<div class="badge__item__detail-price">
+							<span class="badge__item__currency">EUR</span>
+							<h3 class="badge__item__amount">{{ element['value'] }}</h3>
+						</div>
+					</li>
+				</ul>
 
+				<div class="badge__summary">
+					<div class="badge__summary__total">
+						<h1 class="badge__summary__total__title">Total</h1>
+					</div>
+					<div class="badge__summary__cost">
+						<span class="badge__summary__currency">EUR</span>
+						<h3 class="badge__summary__amount">0</h3>
+					</div>
+				</div>
+				<div class="badge__actions">
+					<button class="button--cancel">Cancelar</button>
+				</div>
+            </ng-container>
+			</div>
 
+			<div class="selection__container">
+				<div class="stepper">
+					<app-stepper></app-stepper>
+				</div>
+				<div class="selection__list">
+					<app-product-card
+						[products]="listOfSelectables$ | async"
+						(productSelected)="selectProductHandler($event)"
+					></app-product-card>
+				</div>
 
-            <div class="badge__summary">
-                <div class="badge__summary__total" >
-                    <h1 class="badge__summary__total__title">Total</h1>
-                </div>
-                <div class="badge__summary__cost"> 
-                    <span class="badge__summary__currency">EUR</span>
-                    <h3 class="badge__summary__amount">0</h3>
-                </div>
-            </div>
-            <div class="badge__actions">
-                <button class="button--cancel"></button>
+				<div class="selection__actions">
+					<!--  <button class="button--cancel">Cancelar</button> -->
+					<button class="button--next"  *ngIf="selectionOnProcess" (click)="nextHandler()">Siguiente</button>
+				</div>
+			</div>
 
-
-                <button class="button--next"></button>
-
-            </div>
-
-
-        </div>
-
-        <div class="selection__container">
-            <div class="stepper">
-                <app-stepper></app-stepper>
-            </div>
-            <div class="selection__list">
-
-                <app-product-card></app-product-card>
-
-            </div>
-
-            <div class="selection__actions">
-                <button class="button--cancel"></button>
-
-                <button class="button--next"></button>
-
-
-            </div>
-
-
-        </div>
-
-    </div>
+	</div>
 </section>
 <!-- https://codepen.io/steveschoger/pen/YbQXGq -->

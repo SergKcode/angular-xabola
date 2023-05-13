@@ -15,6 +15,11 @@
         display: flex;
         flex-direction: row;
         width: 100%;
+        box-shadow: 7px 8px 17px 0px rgba(0,0,0,0.7);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
 
         //PARTE IZQ: RESUMEN SELECCION
         .badge {
@@ -32,8 +37,11 @@
             }
 
             &__title {
+                font-weight: bold;
                 font-size: 16px;
                 color: white;
+                padding: 5px 0 16px 0;
+                
             }
 
             &__list {
@@ -77,7 +85,9 @@
                 }
             }
 
-            &__actions {}
+            &__actions {
+                padding: 24px 16px;
+            }
 
             &__item {
                 display: flex;
@@ -127,9 +137,49 @@
     }
 
     .button {
-        &--cancel {}
+        &--cancel {
+            border-radius: 50px;
+            padding:6px 24px;
+            margin-right: 16px;
+            font-family:Arial;
+            font-size:15px;
+            font-weight:bold;
+            color:#F9C817;
+            cursor:pointer;
 
-        &--next {}
+            &:hover {
+                border:1px solid #f2ab1e;
+            }
+        }
+
+        &--next {
+            box-shadow:inset 0px 1px 0px 0px #f9eca0;
+            background:linear-gradient(to bottom, #f0c911 5%, #f2ab1e 100%);
+            background-color:#F9C817;
+            border-radius:6px;
+            border:1px solid #e65f44;
+            display:inline-block;
+            cursor:pointer;
+            color:#343a40;
+            margin-left: 16px;
+            font-family:Arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #ded17c;
+
+            &:hover {
+                background:linear-gradient(to bottom, #f2ab1e 5%, #f0c911 100%);
+                background-color:#f2ab1e;
+                color:black;
+            }
+
+            &:active {
+                position:relative;
+                top:1px;
+            }
+        }
     }
 
     .selection {
@@ -139,7 +189,7 @@
             flex-direction: column;
             width: 100%;
             padding: 24px;
-            border-top-right-radius: 30px;
+            border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
         }
 
@@ -149,6 +199,12 @@
             padding: 16px;
         }
 
-        &__actions {}
+        &__actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            padding: 16px;
+
+        }
     }
 }
