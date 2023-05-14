@@ -37,6 +37,7 @@
 			<div class="selection__list">
 				<app-product-card
 					[products]="listOfSelectables$ | async"
+					[selectedIdProducts]="idsSelected$|async"
 					(productSelected)="selectProductHandler($event)"
 				></app-product-card>
 			</div>

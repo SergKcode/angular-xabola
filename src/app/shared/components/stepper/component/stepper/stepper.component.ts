@@ -15,7 +15,6 @@ export class StepperComponent implements OnChanges {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['step']) {
-      debugger
 			this.step = this.step ? this.step : 1;
 			this.completeWidth = PERCENTAJE_STEPPER_LINE[this.step.toString() || '1'];
 		}

@@ -21,6 +21,7 @@ export class CustomizationComponent implements OnInit {
 	selectionOnProcess: boolean = true;
 	totalCounter$: Observable<number> = of(0);
 	disableButtonNext$: Observable<boolean> = of(false);
+	idsSelected$: Observable<string[]> = of([]);
 
 	constructor(private _customizationService: AbstractCustomizationService, private _store: Store) {}
 
@@ -34,6 +35,18 @@ export class CustomizationComponent implements OnInit {
 			});
 		this.totalCounter$ = this._getTotal();
 		this.disableButtonNext$ = this._disabledButton();
+		this.idsSelected$ = this._getSelectedIds();
+	}
+
+	/**
+	 *
+	 */
+	private _getSelectedIds() {
+		return this.houseElementsSelected$.pipe(
+			map((products) => {
+				return products.map((product) => product.id);
+			})
+		);
 	}
 
 	/**
