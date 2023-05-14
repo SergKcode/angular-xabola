@@ -55,9 +55,9 @@ export class CustomizationComponent implements OnInit {
 	private _buildSelectionResume(product: any) {
 		if (product) {
 			const type = product.description;
-			const previousValue = this.houseElementsSelected$.getValue();
-			const index = previousValue.findIndex((element) => element.description === type);
-			if (index >= 0) {
+			const previousValue = this.houseElementsSelected$.getValue();	
+			const index = previousValue.findIndex((element) => element.description === type )
+			if (index >= 0 && type!== 'Equipamiento' &&type!=='Autosuficiencia') {
 				previousValue[index] = product;
 				this.houseElementsSelected$.next([...previousValue]);
 			} else {
@@ -72,7 +72,11 @@ export class CustomizationComponent implements OnInit {
 	private _disabledButton() {
 		return combineLatest([this.houseElementsSelected$, this.selectionOrder$]).pipe(
 			map(([elementsSelected, order]) => {
-				return elementsSelected.length !== order;
+				if (order<=3){
+					return elementsSelected.length !== order;
+				}
+				return false
+				
 			})
 		);
 	}
