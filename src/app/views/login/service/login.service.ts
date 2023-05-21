@@ -2,25 +2,28 @@ import { Injectable } from '@angular/core';
 import { AbstractLoginService } from './abstract-login.service';
 import { AuthCredential } from '../model/login.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, of , map} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Store } from '@ngrx/store';
+import { saveUserRole } from 'src/app/redux/app.action';
 
 @Injectable()
 export class LoginService implements AbstractLoginService {
 	private accessToken: string = '';
-	constructor(private _httpClient: HttpClient) {}
+	constructor(private _httpClient: HttpClient, private _store:Store) {}
 
-	authUser(credetials: AuthCredential): Observable<any> {
+	autenticateUser(credetials: AuthCredential): Observable<boolean> {
 		return this._httpClient.post<any>(`${environment.baseUrl}/auth`, credetials).pipe(
 			catchError((error) => {
 				console.log(error);
-				return '';
+				return of(false);
 			}),
-			tap((response) => {
+			map((response) => {
 				const accessToken = response.accessToken;
 				this._setAccessToken(accessToken);
-				
+
+				return !!accessToken
 			})
 		);
 	}
@@ -30,7 +33,7 @@ export class LoginService implements AbstractLoginService {
 		this.accessToken = token;
 	}
 
-	getAccessToken() {
+	getAccessToken():string | null{
 		return this.accessToken || localStorage.getItem('accessToken');
 	}
 }

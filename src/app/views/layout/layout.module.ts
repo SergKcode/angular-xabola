@@ -5,6 +5,9 @@ import { MenuModule } from 'src/app/shared/components/menu/menu.module';
 import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from 'src/app/shared/interceptors/auth.interceptor';
+import { LoginServiceModule } from '../login/service/login.service.module';
 
 @NgModule({
   declarations: [
@@ -15,8 +18,15 @@ import { RouterModule } from '@angular/router';
     LayoutRoutingModule,
     RouterModule,
     MenuModule,
-    FooterModule
+    FooterModule,
+    LoginServiceModule
+
   ],
+	providers: [ {
+		provide: HTTP_INTERCEPTORS,
+		useClass: AuthInterceptor,
+		multi: true
+	  }],
   exports:[LayoutComponent]
 })
 export class LayoutModule { }

@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { AppState, initialAppState } from './app.state';
-import { getUserRoleError, getUserRoleSuccess, resetCustomSelection, saveCurrentRoute, saveCustomSelection } from './app.action';
+import { getUserRoleError, getUserRoleSuccess, resetCustomSelection, saveCurrentRoute, saveCustomSelection, saveUserRole } from './app.action';
 import { HouseElementsTypes } from '../shared/model/shared.model';
 
 const _appReducer = createReducer(
@@ -23,7 +23,8 @@ const _appReducer = createReducer(
 	})),
 	on(getUserRoleSuccess, (state, { isAdmin }) => ({ ...state, isAdmin })),
 	on(getUserRoleError, (state) => ({ ...state, isAdmin: false })),
-	on(saveCurrentRoute, (state,  { route }) =>({...state, route}))
+	on(saveCurrentRoute, (state,  { route }) =>({...state, route})),
+	on(saveUserRole, (state,  { isAdmin }) =>({...state, isAdmin}))
 );
 
 export function appReducer(state: AppState | undefined, action: Action) {

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './component/layout/layout.component';
 import { AppRoutes } from 'src/app/shared/model/shared.model';
+import { CanAccessToAdmin } from '../administration/guards/can-access-admin.guard';
 
 const routes: Routes = [
   {
@@ -38,6 +39,15 @@ const routes: Routes = [
         loadChildren: () =>
           import('../login/login.module').then((m) => m.LoginModule),
       },
+      {
+        path: AppRoutes.ADMIN,
+        canActivate:  [CanAccessToAdmin],
+        loadChildren: () =>
+          import('../administration/administration.module').then((m) => m.AdministrationModule),
+      },
+
+
+   
     ],
   },
 ];

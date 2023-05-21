@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { LoginServiceModule } from './login.service.module';
 import { AuthCredential } from '../model/login.model';
+import { StoreModule } from '@ngrx/store';
 
 @Injectable({
 	providedIn: LoginServiceModule,
 	useClass: LoginService,
-	deps: [HttpClient]
+	deps: [HttpClient, StoreModule]
 })
 export abstract class AbstractLoginService {
-	abstract authUser(credetials:AuthCredential):Observable<any>
+	abstract autenticateUser(credetials:AuthCredential):Observable<any>
+	abstract getAccessToken():string | null
 }
