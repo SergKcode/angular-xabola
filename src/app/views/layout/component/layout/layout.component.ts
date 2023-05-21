@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject } from 'rxjs';
+import { saveCurrentRoute } from 'src/app/redux/app.action';
+import { AppRoutes } from 'src/app/shared/model/shared.model';
 
 @Component({
   selector: 'app-layout',
@@ -6,10 +11,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
+  isAdminView$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor(private _router: Router, private _store:Store) { }
 
   ngOnInit(): void {
+    this.isAdminView$.next(this._router.url===`/${AppRoutes.ADMIN}`)
+    this._router.events.pipe().subscribe(event=>{
+			if (event instanceof NavigationEnd) {
+        this._store.dispatch(saveCurrentRoute({route:event.url}))
+			  }
+		})
+    
   }
 
 }

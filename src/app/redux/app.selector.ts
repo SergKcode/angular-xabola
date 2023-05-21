@@ -20,3 +20,4 @@ export const selectCustomizationSelection = createSelector(selectAppState, (stat
 	return state?.customizationSelection;
 });
 export const selectIsAdmin = createSelector(selectAppState, (state: AppState): boolean => !!state.isAdmin);
+export const selectCurrentRoute = createSelector(selectAppState, (state: AppState): string => state.route);

@@ -11,14 +11,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: AppRoutes.ABOUT_US,
+        redirectTo: AppRoutes.HOME,
         pathMatch: 'full',
       },
       {
-        path: AppRoutes.ABOUT_US,
+        path: AppRoutes.HOME,
         loadChildren: () =>
-          import('../about-us/about-us.module').then(
-            (m) => m.AboutUsModule
+          import('../about-us/home.module').then(
+            (m) => m.HomeModule
           ),
       },
       {
@@ -34,7 +34,7 @@ const routes: Routes = [
           import('../contact/contact.module').then((m) => m.ContactModule),
       },
       {
-        path: AppRoutes.ADMIN,
+        path: AppRoutes.LOGIN,
         loadChildren: () =>
           import('../login/login.module').then((m) => m.LoginModule),
       },

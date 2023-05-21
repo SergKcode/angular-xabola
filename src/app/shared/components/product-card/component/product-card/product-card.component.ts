@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { Store } from '@ngrx/store';
 import {  Product } from 'src/app/views/customization/model/customization.model';
 import { StyleProductsStatus } from '../../model/product-card.config';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-product-card',
@@ -10,6 +11,8 @@ import { StyleProductsStatus } from '../../model/product-card.config';
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent implements OnChanges, OnInit {
+	productImagesLoaded$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  showSkeletons$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   @Input() products:any[]=[]
   @Input() selectedIdProducts:string[] |null=[]
   @Output() productSelected = new EventEmitter<Product>();
@@ -29,5 +32,20 @@ export class ProductCardComponent implements OnChanges, OnInit {
 		if (changes['selectedIdProducts']) {
 			this.ids=this.selectedIdProducts ||[]
 		}
+    if (changes['products']) {
+      this.productImagesLoaded$.next([])
+      this.showSkeletons$.next(true)
+
+      
+		}
 	}
+
+  imageLoaded(product:Product){
+
+    const previousImagesLoaded= this.productImagesLoaded$.getValue()
+    this.productImagesLoaded$.next([...previousImagesLoaded,product])
+    this.showSkeletons$.next(this.productImagesLoaded$.getValue().length !== this.products.length)
+
+
+  }
 }

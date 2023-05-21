@@ -1,6 +1,6 @@
-<section class="customization">
+<section class="customization" *ngIf="(selectionOrder$ | async) as order">
 	<div class="customization__container">
-		<div class="badge__container" *ngIf="(houseElementsSelected$ | async)?.length">
+		<div [ngClass]="{'badge__container': order !== 6,'badge__container--big': order === 6 }"class="badge__container" *ngIf="(houseElementsSelected$ | async)?.length">
 			<h1 class="badge__title">Resumen de seleccion</h1>
 
 			<ul class="badge__list" *ngFor="let element of houseElementsSelected$ | async">
@@ -27,31 +27,38 @@
 			</div>
 			<div class="badge__actions">
 				<button class="button--cancel" (click)="cancelSelectionProcess()">Cancelar</button>
+				<button *ngIf="order === 6"  class="button--next" (click)="requestBadget()">Solicitar presupuesto</button>
 			</div>
 		</div>
 
-		<div class="selection__container">
-			<div class="stepper">
-				<app-stepper [step]="selectionOrder$ | async"></app-stepper>
-			</div>
-			<div class="selection__list">
-				<app-product-card
-					[products]="listOfSelectables$ | async"
-					[selectedIdProducts]="idsSelected$|async"
-					(productSelected)="selectProductHandler($event)"
-				></app-product-card>
-			</div>
+		<ng-container *ngIf="order !== 6">
+			<div class="selection__container">
+				<ng-container>
+					<div class="stepper">
+						<app-stepper [step]="order"></app-stepper>
+					</div>
+					<div class="selection__list">
+						<app-product-card
+							[products]="listOfSelectables$ | async"
+							[selectedIdProducts]="idsSelected$ | async"
+							(productSelected)="selectProductHandler($event)"
+						></app-product-card>
+					</div>
 
-			<div class="selection__actions">
-				<button
-					class="button--next"
-					*ngIf="selectionOnProcess"
-					(click)="nextHandler()"
-					[disabled]="disableButtonNext$ | async"
-				>
-					Siguiente
-				</button>
+					<div class="selection__actions">
+						<button
+							class="button--next"
+							*ngIf="selectionOnProcess"
+							(click)="nextHandler()"
+							[disabled]="disableButtonNext$ | async"
+						>
+							Siguiente
+						</button>
+					</div>
+				</ng-container>
+				
+				
 			</div>
-		</div>
+		</ng-container>
 	</div>
 </section>

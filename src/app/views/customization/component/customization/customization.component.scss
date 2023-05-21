@@ -10,6 +10,7 @@
 
 .customization {
 	width: 100%;
+	padding: 30px 100px;
 
 	&__container {
 		display: flex;
@@ -33,6 +34,61 @@
 				border-bottom-left-radius: 10px;
 				justify-content: flex-start;
 				align-items: center;
+
+				&--big {
+					display: flex;
+					flex-direction: column;
+					background-color: #343a40;
+					width: 100%;
+					padding: 50px;
+					border-top-left-radius: 10px;
+					border-bottom-left-radius: 10px;
+					justify-content: flex-start;
+					align-items: center;
+
+					&__item {
+						display: flex;
+						width: 100%;
+						flex-direction: column;
+						padding: 10px 5px;
+						border-bottom: 2px solid;
+						border-image: linear-gradient(to left, turquoise, #f9c817) 1 0;
+		
+						&__description {
+							display: flex;
+							flex-direction: column;
+							align-items: flex-start;
+						}
+		
+						&__type {
+							font-size: 14px;
+							color: white;
+							font-style: italic;
+						}
+		
+						&__name {
+							font-size: 16px;
+							color: white;
+						}
+		
+						&__detail-price {
+							display: flex;
+							flex-direction: row;
+							justify-content: flex-end;
+							gap: 20px;
+						}
+		
+						&__currency {
+							font-size: 16px;
+							color: white;
+						}
+		
+						&__amount {
+							font-size: 16px;
+							color: white;
+						}
+					}
+				}
 			}
 
 			&__title {
@@ -107,13 +163,14 @@
 				}
 
 				&__type {
-					font-size: 12px;
+					font-size: 14px;
 					color: white;
 					font-style: italic;
 				}
 
 				&__name {
-					font-size: 14px;
+					font-size: 16px;
+					font-weight: 500;
 					color: white;
 				}
 
@@ -210,6 +267,36 @@
 			flex-direction: row;
 			justify-content: flex-end;
 			padding: 16px;
+		}
+	}
+
+	.contact {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		&__title {
+			margin: 10px 0;
+			padding-bottom: 10px;
+			width: 180px;
+			color: #343a40;
+			border-bottom: 3px solid #343a40;
+			font-weight: bold;
+			font-size: 16px;
+		}
+
+		&__list {
+			display: flex;
+			flex-direction: column;
+			padding: 16px 0 24px 0;
+		}
+
+		&__element {
+			display: flex;
+			flex-direction: row;
+			gap: 10px;
+			padding: 16px 0;
 		}
 	}
 }

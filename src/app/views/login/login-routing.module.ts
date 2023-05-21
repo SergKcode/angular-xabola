@@ -7,18 +7,6 @@ export const routes: Routes = [
     {
       path: '',
       component: LoginComponent,
-      children: [
-        {
-          path: '',
-          redirectTo: AppRoutes.ADMIN,
-          pathMatch: 'full',
-        },
-        {
-          path: AppRoutes.ADMIN,
-          loadChildren: () =>
-            import('./login.module').then((m) => m.LoginModule),
-        },
-      ],
     },
   ];
   

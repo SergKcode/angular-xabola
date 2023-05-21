@@ -9,7 +9,9 @@ export enum AppRoutes{
     CUSTOMIZATION='personaliza',
     CONTACT='contacto',
     ABOUT_US='sobre-nosotros',
-    ADMIN='admin'
+    LOGIN='login',
+    ADMIN='admin',
+    HOME='inicio'
 }
 
 export interface GenericObject{

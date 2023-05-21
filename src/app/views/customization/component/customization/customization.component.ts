@@ -4,10 +4,11 @@ import { map, skipWhile } from 'rxjs/operators';
 import { CUSTOMIZATION_LIST_VIEW_CONFIG, MODULE_LITERAL } from '../../model/customization.config';
 import { Container, Extra, Product } from '../../model/customization.model';
 import { AbstractCustomizationService } from '../../service/abstract-customization.service';
-import { GenericObject, HouseElementsTypes } from 'src/app/shared/model/shared.model';
+import { AppRoutes, GenericObject, HouseElementsTypes } from 'src/app/shared/model/shared.model';
 import { Store } from '@ngrx/store';
 import { resetCustomSelection, saveCustomSelection } from 'src/app/redux/app.action';
 import { selectCustomizationSelection, selectIsAdmin } from 'src/app/redux/app.selector';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-customization',
@@ -23,7 +24,7 @@ export class CustomizationComponent implements OnInit {
 	disableButtonNext$: Observable<boolean> = of(false);
 	idsSelected$: Observable<string[]> = of([]);
 
-	constructor(private _customizationService: AbstractCustomizationService, private _store: Store) {}
+	constructor(private _customizationService: AbstractCustomizationService, private _store: Store, private _router: Router) {}
 
 	ngOnInit(): void {
 		this.listOfSelectables$ = this._getListOfCustomization();
@@ -124,7 +125,7 @@ export class CustomizationComponent implements OnInit {
 	 *
 	 */
 	nextHandler() {
-		const currentValue = this.selectionOrder$.getValue();
+		const currentValue:number = this.selectionOrder$.getValue();
 		this.selectionOnProcess = !(currentValue >= 6);
 		this.selectionOrder$.next(currentValue + 1);
 	}
@@ -137,4 +138,11 @@ export class CustomizationComponent implements OnInit {
 		this.selectionOrder$.next(1);
 		this.houseElementsSelected$.next([]);
 	}
+/**
+	 *
+	 */
+	requestBadget(){
+		this._router.navigateByUrl(`/${AppRoutes.CONTACT}`);
+	}
+
 }
