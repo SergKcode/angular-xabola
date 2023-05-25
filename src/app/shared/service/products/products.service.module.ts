@@ -4,4 +4,4 @@ import { NgModule } from '@angular/core';
 @NgModule({
 	imports: [HttpClientModule]
 })
-export class CustomizationServiceModule {}
+export class ProductsServiceModule {}

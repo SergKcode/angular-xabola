@@ -4,7 +4,7 @@ import { CustomizationComponent } from './component/customization/customization.
 import { CustomizationRoutingModule } from './customization-routing.module';
 import { StepperModule } from 'src/app/shared/components/stepper/stepper.module';
 import { ProductCardModule } from 'src/app/shared/components/product-card/product-card.module';
-import { CustomizationServiceModule } from './service/customization.service.module';
+import { ProductsServiceModule } from 'src/app/shared/service/products/products.service.module';
 
 
 
@@ -17,7 +17,7 @@ import { CustomizationServiceModule } from './service/customization.service.modu
     CustomizationRoutingModule,
     StepperModule,
     ProductCardModule,
-    CustomizationServiceModule
+    ProductsServiceModule
   ]
 })
 export class CustomizationModule { }

@@ -1,27 +1,33 @@
-export interface MenuList{
-    id:number,
-    order:number,
-    label:string,
-    route: AppRoutes
+export interface MenuList {
+	id: number;
+	order: number;
+	label: string;
+	route: AppRoutes;
 }
 
-export enum AppRoutes{
-    CUSTOMIZATION='personaliza',
-    CONTACT='contacto',
-    ABOUT_US='sobre-nosotros',
-    LOGIN='login',
-    ADMIN='admin',
-    HOME='inicio'
+export enum AppRoutes {
+	CUSTOMIZATION = 'personaliza',
+	CONTACT = 'contacto',
+	ABOUT_US = 'sobre-nosotros',
+	LOGIN = 'login',
+	ADMIN = 'admin',
+	HOME = 'inicio'
 }
 
-export interface GenericObject{
-    [key:string]:any
+export interface GenericObject {
+	[key: string]: any;
 }
 
-export enum HouseElementsTypes{
-    CONTAINERS= 'CO',
-    EXTERIOR='EX',
-    INTERIOR='IN',
-    EQUIPAMIENTO='EQ',
-    AUTOSUFICIENCIA='AT'
+export enum HouseElementsTypes {
+	CONTAINERS = 'CO',
+	EXTERIOR = 'EX',
+	INTERIOR = 'IN',
+	EQUIPAMIENTO = 'EQ',
+	AUTOSUFICIENCIA = 'AT'
+}
+
+export const enum administrationAction {
+	EDIT = 'edit',
+	ADD = 'add',
+	DELETE = 'delete'
 }

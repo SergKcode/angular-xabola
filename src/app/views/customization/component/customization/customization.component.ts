@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of, switchMap, combineLatest } from 'rxjs'
 import { map, skipWhile } from 'rxjs/operators';
 import { CUSTOMIZATION_LIST_VIEW_CONFIG, MODULE_LITERAL } from '../../model/customization.config';
 import { Container, Extra, Product } from '../../model/customization.model';
-import { AbstractCustomizationService } from '../../service/abstract-customization.service';
+import { AbstractProductsService } from '../../../../shared/service/products/abstract-products.service';
 import { AppRoutes, GenericObject, HouseElementsTypes } from 'src/app/shared/model/shared.model';
 import { Store } from '@ngrx/store';
 import { resetCustomSelection, saveCustomSelection } from 'src/app/redux/app.action';
@@ -24,7 +24,7 @@ export class CustomizationComponent implements OnInit {
 	disableButtonNext$: Observable<boolean> = of(false);
 	idsSelected$: Observable<string[]> = of([]);
 
-	constructor(private _customizationService: AbstractCustomizationService, private _store: Store, private _router: Router) {}
+	constructor(private _customizationService: AbstractProductsService, private _store: Store, private _router: Router) {}
 
 	ngOnInit(): void {
 		this.listOfSelectables$ = this._getListOfCustomization();
