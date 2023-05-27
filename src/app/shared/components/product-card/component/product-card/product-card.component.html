@@ -7,9 +7,11 @@
 				: 'flex w-full bg-white shadow-lg rounded-lg overflow-hidden'
 		}}"
 	>
+<!-- 
+	[src]="'../../../../../../assets/images/' + product.image" -->
 		<img
 			class="w-1/3 bg-cover"
-			[src]="'../../../../../../assets/images/' + product.image"
+			[src]="product.image"
 			(load)="imageLoaded(product)"
 		/>
 		<div class="w-2/3 p-4">
