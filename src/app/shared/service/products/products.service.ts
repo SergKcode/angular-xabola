@@ -22,7 +22,7 @@ export class ProductsService implements AbstractProductsService {
 	 *
 	 *
 	 */
-	getModule(id: number): Observable<Product> {
+	getModule(id: string): Observable<Product> {
 		return this._httpClient.get<any>(`${environment.baseUrl}/containers/${id}`);
 	}
 
@@ -38,7 +38,7 @@ export class ProductsService implements AbstractProductsService {
 	 *
 	 *
 	 */
-	getExtra(id: number): Observable<Product> {
+	getExtra(id: string): Observable<Product> {
 		return this._httpClient.get<any>(`${environment.baseUrl}/extras/${id}`);
 	}
 
@@ -54,7 +54,7 @@ export class ProductsService implements AbstractProductsService {
 	 *
 	 *
 	 */
-	deleteContainer(id:string): Observable<any> {
+	deleteContainer(id: string): Observable<any> {
 		return this._httpClient.delete<any>(`${environment.baseUrl}/containers/${id}`);
 	}
 
@@ -62,7 +62,25 @@ export class ProductsService implements AbstractProductsService {
 	 *
 	 *
 	 */
-	deleteExtra(id:string): Observable<any> {
-		return this._httpClient.delete<any>(`${environment.baseUrl}/extras/${id}` );
+	deleteExtra(id: string): Observable<any> {
+		return this._httpClient.delete<any>(`${environment.baseUrl}/extras/${id}`);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	editContainer(id: string, values: Partial<Container>): Observable<any> {
+		const { name, value } = values;
+		return this._httpClient.patch<any>(`${environment.baseUrl}/containers/${id}`, { name, value });
+	}
+
+	/**
+	 *
+	 *
+	 */
+	editExtra(id: string, values: Partial<Extra>): Observable<any> {
+		const { name, value } = values;
+		return this._httpClient.patch<any>(`${environment.baseUrl}/extras/${id}`, { name, value });
 	}
 }

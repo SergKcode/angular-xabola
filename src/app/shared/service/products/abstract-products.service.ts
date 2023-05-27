@@ -13,11 +13,12 @@ import { HouseElementsTypes } from '../../model/shared.model';
 })
 export abstract class AbstractProductsService {
 	abstract getAllModules(): Observable<Product[]>;
-	abstract getModule(id: number): Observable<Product>;
-	abstract getExtra(id: number): Observable<Product>;
+	abstract getModule(id: string): Observable<Product>;
+	abstract getExtra(id: string): Observable<Product>;
 	abstract getAllExtras(): Observable<Product[]>;
 	abstract getExtrasByType(type: HouseElementsTypes): Observable<Product[]>;
 	abstract deleteContainer(id:string): Observable<any> 
 	abstract deleteExtra(id:string): Observable<any> 
-
+	abstract editContainer(id: string, values: Partial<Container>): Observable<Container> 
+	abstract editExtra(id: string, values: Partial<Extra>): Observable<Extra> 
 }
