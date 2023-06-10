@@ -12,18 +12,11 @@ import { ProductTypeCode } from '../../model/shared.model';
 	deps: [HttpClient]
 })
 export abstract class AbstractProductsService {
-	abstract getAllModules(): Observable<Product[]>;
-	abstract getModule(id: string): Observable<Product>;
-	abstract getExtra(id: string): Observable<Product>;
-	abstract getAllExtras(): Observable<Product[]>;
-	abstract getExtrasByType(type: ProductTypeCode): Observable<Product[]>;
-	abstract deleteContainer(id: string): Observable<any>;
-	abstract deleteExtra(id: string): Observable<any>;
-	abstract editContainer(id: string, values: Partial<Container>): Observable<Container>;
-	abstract editExtra(id: string, values: Partial<Extra>): Observable<Extra>;
-	abstract createNewContainer(values: { [key: string]: any }, file: File): Observable<any>;
-	abstract createNewExtra(values: { [key: string]: any }, file: File): Observable<any>;
+	abstract getProduct(id: string): Observable<Product>;
 	abstract getAllProducts(): Observable<any[]>;
 	abstract getAllProductsByType(typeId: string): Observable<any[]>;
 	abstract getProductsTypes(): Observable<any[]>;
+	abstract createNewProduct(values: { [key: string]: any }, file: File): Observable<Product>;
+	abstract editProduct(id: string, values: Partial<Product>): Observable<any>;
+	abstract deleteProduct(id: string): Observable<any>;
 }

@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { resetCustomSelection, saveCustomSelection } from 'src/app/redux/app.action';
 import { selectCustomizationSelection, selectIsAdmin, selectProductTypes } from 'src/app/redux/app.selector';
 import { Router } from '@angular/router';
+import { AbstractUtilsService } from 'src/app/shared/service/utils/abstract-utils.service';
 
 @Component({
 	selector: 'app-customization',
@@ -28,7 +29,8 @@ export class CustomizationComponent implements OnInit {
 	constructor(
 		private _customizationService: AbstractProductsService,
 		private _store: Store,
-		private _router: Router
+		private _router: Router,
+		private _utilsService: AbstractUtilsService
 	) {}
 
 	ngOnInit(): void {
@@ -60,7 +62,6 @@ export class CustomizationComponent implements OnInit {
 			const indexProductWithSameType = previousValue.findIndex((element) => element?.typeId?.typeCode === type);
 			const isProductSelectedDuplicated = previousValue.findIndex((element) => element?.id === product.id) >= 0;
 
-			
 			if (isProductSelectedDuplicated) {
 				//Toggle de producto seleccionado
 				const unSelectProduct = previousValue.filter((element) => element.id !== product.id);
@@ -114,7 +115,7 @@ export class CustomizationComponent implements OnInit {
 	/**
 	 *
 	 */
-	private _getListOfCustomization(): Observable<Product[]> {
+	/* 	private _getListOfCustomization(): Observable<Product[]> {
 		return combineLatest([this.productTypes$, this.selectionOrder$]).pipe(
 			switchMap(([productTypes, order]: [ProductTypes[], number]) => {
 				if (productTypes.length) {
@@ -130,7 +131,29 @@ export class CustomizationComponent implements OnInit {
 			})
 		);
 	}
+ */
 
+	/**
+	 *
+	 */
+	private _getListOfCustomization(): Observable<Product[]> {
+		return this.selectionOrder$.pipe(
+			switchMap((order) => {
+				const productCode =
+					CUSTOMIZATION_LIST_VIEW_CONFIG.find((element) => element.order === order)?.type ||
+					ProductTypeCode.CONTAINERS;
+
+				return this._utilsService.getProductTypeIdByTypeCode(productCode).pipe(
+					switchMap((typeId) => {
+						if (order <= 5 && typeId) {
+							return this._customizationService.getAllProductsByType(typeId);
+						}
+						return of([]);
+					})
+				);
+			})
+		);
+	}
 	/**
 	 *
 	 */

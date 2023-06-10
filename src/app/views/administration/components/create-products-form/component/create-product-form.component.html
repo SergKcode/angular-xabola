@@ -1,0 +1,82 @@
+<div class="px-8 mx-auto max-w-2xl lg:py-16 rounded-xl bg-white shadow-xl">
+	<h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">{{ translateTitle }}</h2>
+
+	<form [formGroup]="addNewProductForm" (ngSubmit)="createNewProductSubmit()">
+		<div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+			<div class="sm:col-span-2">
+				<label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+				<input
+					type="text"
+					formControlName="name"
+					class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+					placeholder="Techo de pladur"
+				/>
+			</div>
+			<div class="w-full">
+				<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
+				<input
+					type="number"
+					formControlName="price"
+					class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+					placeholder="2000€"
+					required=""
+				/>
+			</div>
+			<div>
+				<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de producto</label>
+				<select
+					formControlName="type"
+					class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+				>
+					<option value="CO">Contenedor</option>
+					<option value="EX">Exterior</option>
+					<option value="IN">Interior</option>
+					<option value="AT">Autosuficiencia</option>
+					<option value="EQ">Equipamiento</option>
+				</select>
+			</div>
+
+			<ng-container *ngIf="isContainerType$ | async"
+				><fieldset class="w-full space-y-1 text-gray-800">
+					<label for="price" class="block text-sm font-medium">Medidas</label>
+					<div class="flex">
+						<input
+							formControlName="size"
+							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-tl-lg rounded-bl-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+							placeholder="12"
+							type="number"
+						/>
+						<span
+							class="flex items-center px-3 pointer-events-none sm:text-sm bg-gray-300 rounded-tr-lg rounded-br-lg"
+						>
+							M<sup class="text-xs">2</sup>
+						</span>
+					</div>
+				</fieldset></ng-container
+			>
+		</div>
+		<!-- SUBIDA IMAGENES -->
+		<div>
+			<fieldset class="w-full space-y-1 text-gray-800 mt-2">
+				<label for="files" class="block text-sm font-medium">Suba una imagen de producto</label>
+				<div class="flex">
+					<input
+						type="file"
+						name="files"
+						id="files"
+						class="px-8 py-12 border-2 border-dashed rounded-md border-gray-300 text-gray-600 bg-gray-100"
+						(change)="onFileSelected($event)"
+						(load)="onFileLoad()"
+					/>
+				</div>
+			</fieldset>
+		</div>
+		<button
+			[disabled]="!(enableSubmitButton$ | async)"
+			type="submit"
+			class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center rounded bg-indigo-600 text-gray-50 shadow hover:bg-indigo-700 focus:outline-none active:bg-indigo-800 sm:w-auto disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+		>
+			Add product
+		</button>
+	</form>
+</div>

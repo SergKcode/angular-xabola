@@ -9,7 +9,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './redux/app.reducer';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
@@ -17,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 		AppRoutingModule,
 		HttpClientModule,
 		LayoutModule,
-		StoreModule.forRoot({app:appReducer}),
+		StoreModule.forRoot({ app: appReducer }),
 		EffectsModule.forRoot({}),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25

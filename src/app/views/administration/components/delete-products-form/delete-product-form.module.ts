@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductFormComponent } from './component/product-form/product-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteProductFormComponent } from './component/delete-product-form.component';
 
 
 
 @NgModule({
   declarations: [
-    ProductFormComponent
+    DeleteProductFormComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
-  exports:[ProductFormComponent]
+  exports:[DeleteProductFormComponent]
 })
-export class ProductFormModule { }
+export class DeleteProductFormModule { }
