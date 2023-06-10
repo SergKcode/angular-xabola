@@ -27,6 +27,7 @@ export class ProductCardComponent implements OnChanges, OnInit {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
+		console.log('1',this.products)
 		if (changes['selectedIdProducts']) {
 			this.ids = this.selectedIdProducts || [];
 		}

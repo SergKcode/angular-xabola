@@ -1,7 +1,15 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { AppState, initialAppState } from './app.state';
-import { getUserRoleError, getUserRoleSuccess, resetCustomSelection, saveCurrentRoute, saveCustomSelection, saveUserRole } from './app.action';
-import { HouseElementsTypes } from '../shared/model/shared.model';
+import {
+	getProductTypesError,
+	getProductTypesSuccess,
+	getUserRoleError,
+	getUserRoleSuccess,
+	resetCustomSelection,
+	saveCurrentRoute,
+	saveCustomSelection
+} from './app.action';
+import { ProductTypeCode } from '../shared/model/shared.model';
 
 const _appReducer = createReducer(
 	initialAppState,
@@ -15,7 +23,7 @@ const _appReducer = createReducer(
 			id: '',
 			name: '',
 			size: 0,
-			type: HouseElementsTypes.CONTAINERS,
+			typeId: { id: '', name: '', typeCode: ProductTypeCode.AUTOSUFICIENCIA },
 			value: 0,
 			image: '',
 			description: ''
@@ -23,8 +31,9 @@ const _appReducer = createReducer(
 	})),
 	on(getUserRoleSuccess, (state, { isAdmin }) => ({ ...state, isAdmin })),
 	on(getUserRoleError, (state) => ({ ...state, isAdmin: false })),
-	on(saveCurrentRoute, (state,  { route }) =>({...state, route})),
-	on(saveUserRole, (state,  { isAdmin }) =>({...state, isAdmin}))
+	on(saveCurrentRoute, (state, { route }) => ({ ...state, route })),
+	on(getProductTypesSuccess, (state, { productTypes }) => ({ ...state, productTypes })),
+	on(getProductTypesError, (state) => ({ ...state, productTypes: [] }))
 );
 
 export function appReducer(state: AppState | undefined, action: Action) {

@@ -8,6 +8,12 @@ import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/shared/interceptors/auth.interceptor';
 import { LoginServiceModule } from '../login/service/login.service.module';
+import { StoreModule } from '@ngrx/store';
+import { appFeatureKey } from 'src/app/redux/app.state';
+import { appReducer } from 'src/app/redux/app.reducer';
+import {  EffectsModule } from '@ngrx/effects';
+import { AppEffects } from 'src/app/redux/app.effect';
+import { ProductsServiceModule } from 'src/app/shared/service/products/products.service.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +25,12 @@ import { LoginServiceModule } from '../login/service/login.service.module';
     RouterModule,
     MenuModule,
     FooterModule,
-    LoginServiceModule
+    LoginServiceModule,
+    ProductsServiceModule,
+    StoreModule.forFeature(appFeatureKey,appReducer),
+    EffectsModule.forFeature([AppEffects])
+  
+   
 
   ],
 	providers: [ {

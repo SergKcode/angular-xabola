@@ -18,7 +18,7 @@ export interface GenericObject {
 	[key: string]: any;
 }
 
-export enum HouseElementsTypes {
+export enum ProductTypeCode {
 	CONTAINERS = 'CO',
 	EXTERIOR = 'EX',
 	INTERIOR = 'IN',
@@ -30,4 +30,10 @@ export const enum administrationAction {
 	EDIT = 'edit',
 	ADD = 'add',
 	DELETE = 'delete'
+}
+
+export interface ProductTypes {
+	id: string;
+	name: string;
+	typeCode: ProductTypeCode;
 }

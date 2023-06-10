@@ -9,6 +9,7 @@ export class AuthInterceptor implements HttpInterceptor {
 	constructor(private _loginService: AbstractLoginService) {}
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
 		// Obtén el access token de donde lo hayas almacenado en tu aplicación (por ejemplo, localStorage)
 		const accessToken = this._loginService.getAccessToken()
 

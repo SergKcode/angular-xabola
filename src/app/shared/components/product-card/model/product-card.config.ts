@@ -1,10 +1,10 @@
-import { HouseElementsTypes } from 'src/app/shared/model/shared.model';
+import { ProductTypeCode } from 'src/app/shared/model/shared.model';
 
 export const productTypes = {
-	[HouseElementsTypes.AUTOSUFICIENCIA]: 'Autosuficiencia',
-	[HouseElementsTypes.EXTERIOR]: 'Exterior',
-	[HouseElementsTypes.INTERIOR]: 'Interior',
-	[HouseElementsTypes.EQUIPAMIENTO]: 'Equipamiento'
+	[ProductTypeCode.AUTOSUFICIENCIA]: 'Autosuficiencia',
+	[ProductTypeCode.EXTERIOR]: 'Exterior',
+	[ProductTypeCode.INTERIOR]: 'Interior',
+	[ProductTypeCode.EQUIPAMIENTO]: 'Equipamiento'
 };
 
 export enum StyleProductsStatus {

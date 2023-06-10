@@ -1,4 +1,4 @@
-import { HouseElementsTypes } from 'src/app/shared/model/shared.model';
+import { ProductTypeCode } from 'src/app/shared/model/shared.model';
 
 export interface Container {
 	id: string;
@@ -11,7 +11,7 @@ export interface Container {
 export interface Extra {
 	id: string;
 	name: string;
-	type?: HouseElementsTypes;
+	type?: ProductTypeCode;
 	value: number;
 	image: string | null;
 }
@@ -20,8 +20,15 @@ export interface Product {
 	id: string;
 	name: string;
     size?: number;
-	type?: HouseElementsTypes;
+	typeId?: ProductType
 	value: number;
 	image: string | null;
-	description?: string;
+}
+
+
+export interface ProductType{
+	id:string,
+	name:string
+	typeCode:ProductTypeCode
+
 }

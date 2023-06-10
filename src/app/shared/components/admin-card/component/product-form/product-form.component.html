@@ -1,9 +1,7 @@
-<div class="px-8 mx-auto max-w-2xl lg:py-16 rounded-xl bg-white shadow-xl" *ngIf="adminAction">
+<div class="px-8 mx-auto max-w-2xl lg:py-16 rounded-xl bg-white shadow-xl" *ngIf="(action$|async)">
 	<h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">{{ translateTitle }}</h2>
-	<ng-container
-		[ngTemplateOutlet]="adminAction === 'delete' ? deleteForm : adminAction === 'add' ? addForm : editForm"
-	></ng-container>
-	<ng-template #editForm>
+
+	<ng-container *ngIf="(action$|async) === 'edit'">
 		<form [formGroup]="editProductFormGroup" (ngSubmit)="editProduct()">
 			<div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 				<div>
@@ -83,9 +81,9 @@
 				Editar producto
 			</button>
 		</form>
-	</ng-template>
-	<ng-template #addForm
-		><form [formGroup]="adminProductForm" (ngSubmit)="productFormSubmit()">
+	</ng-container>
+	<ng-container *ngIf="(action$|async) === 'add'"
+		><form [formGroup]="addNewProductForm" (ngSubmit)="createNewProductSubmit()">
 			<div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 				<div class="sm:col-span-2">
 					<label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -121,6 +119,7 @@
 						<option value="EQ">Equipamiento</option>
 					</select>
 				</div>
+				
 				<ng-container *ngIf="isContainerType$ | async"
 					><fieldset class="w-full space-y-1 text-gray-800">
 						<label for="price" class="block text-sm font-medium">Medidas</label>
@@ -139,6 +138,17 @@
 						</div>
 					</fieldset></ng-container
 				>
+			
+				
+			</div>
+				<!-- SUBIDA IMAGENES -->
+			<div>
+				<fieldset class="w-full space-y-1 text-gray-800 mt-2">
+					<label for="files" class="block text-sm font-medium">Suba una imagen de producto</label>
+					<div class="flex">
+						<input type="file" name="files" id="files" class="px-8 py-12 border-2 border-dashed rounded-md border-gray-300 text-gray-600 bg-gray-100"  (change)="onFileSelected($event)" (load)="onFileLoad()">
+					</div>
+				</fieldset>
 			</div>
 			<button
 				[disabled]="!(enableSubmitButton$ | async)"
@@ -147,10 +157,10 @@
 			>
 				Add product
 			</button>
-		</form></ng-template
+		</form></ng-container
 	>
 
-	<ng-template #deleteForm>
+	<ng-container *ngIf="(action$|async) === 'delete'">
 		<form [formGroup]="deleteFormGroup" (ngSubmit)="deleteProduct()">
 			<div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 				<div>
@@ -186,5 +196,5 @@
 				Eliminar producto
 			</button>
 		</form>
-	</ng-template>
+	</ng-container>
 </div>

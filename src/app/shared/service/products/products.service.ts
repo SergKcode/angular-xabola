@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AbstractProductsService } from './abstract-products.service';
-import { HouseElementsTypes } from '../../model/shared.model';
+import { ProductTypes, ProductTypeCode } from '../../model/shared.model';
 import { Container, Extra, Product } from 'src/app/views/customization/model/customization.model';
 
 @Injectable()
@@ -16,6 +16,31 @@ export class ProductsService implements AbstractProductsService {
 	 */
 	getAllModules(): Observable<Product[]> {
 		return this._httpClient.get<any>(`${environment.baseUrl}/containers`);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	getAllProducts(): Observable<any[]> {
+		return this._httpClient.get<any>(`${environment.baseUrl}/products`);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	getAllProductsByType(typeId:string): Observable<any[]> {
+		return this._httpClient.get<any>(`${environment.baseUrl}/products/types/${typeId}`);
+	}
+
+
+	/**
+	 *
+	 *
+	 */
+	getProductsTypes(): Observable<ProductTypes[]>{
+		return this._httpClient.get<ProductTypes[]>(`${environment.baseUrl}/products/types`);
 	}
 
 	/**
@@ -46,7 +71,7 @@ export class ProductsService implements AbstractProductsService {
 	 *
 	 *
 	 */
-	getExtrasByType(type: HouseElementsTypes): Observable<Product[]> {
+	getExtrasByType(type: ProductTypeCode): Observable<Product[]> {
 		return this._httpClient.get<any>(`${environment.baseUrl}/extras/type/${type}`);
 	}
 
@@ -82,5 +107,36 @@ export class ProductsService implements AbstractProductsService {
 	editExtra(id: string, values: Partial<Extra>): Observable<any> {
 		const { name, value } = values;
 		return this._httpClient.patch<any>(`${environment.baseUrl}/extras/${id}`, { name, value });
+	}
+
+	
+	/**
+	 *
+	 *
+	 */
+	createNewContainer(values: {[key:string]:any}, file:File): Observable<any> {
+		const formData= new FormData()
+		const { name, size, price} = values;
+		formData.append('value', price)
+		formData.append('file', file)
+		formData.append('size', size)
+		formData.append('name', name)
+
+		return this._httpClient.post<any>(`${environment.baseUrl}/containers`, formData);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	createNewExtra(values: {[key:string]:any}, file:File): Observable<any> {
+		const formData= new FormData()
+		const { name, type, price} = values;
+		formData.append('value', price)
+		formData.append('file', file)
+		formData.append('type', type)
+		formData.append('name', name)
+
+		return this._httpClient.post<any>(`${environment.baseUrl}/extras`, formData);
 	}
 }

@@ -6,7 +6,6 @@ import { Observable, of , map} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
-import { saveUserRole } from 'src/app/redux/app.action';
 
 @Injectable()
 export class LoginService implements AbstractLoginService {

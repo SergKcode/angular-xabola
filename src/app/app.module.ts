@@ -7,11 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { LayoutModule } from './views/layout/layout.module';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './redux/app.reducer';
-import { LoginService } from './views/login/service/login.service';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-import { LoginServiceModule } from './views/login/service/login.service.module';
-import { LoginModule } from './views/login/login.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
 	declarations: [AppComponent],
