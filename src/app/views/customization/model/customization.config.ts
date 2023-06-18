@@ -8,10 +8,3 @@ export const CUSTOMIZATION_LIST_VIEW_CONFIG = [
 	{ order: 5, type: ProductTypeCode.AUTOSUFICIENCIA }
 ];
 
-export const MODULE_LITERAL = {
-	CO: 'Modulo',
-	EX: 'Exterior',
-	IN: 'Interior',
-	EQ: 'Equipamiento',
-	AT: 'Autosuficiencia'
-};

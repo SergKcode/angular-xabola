@@ -1,11 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, combineLatest, first, map, of, switchMap, tap } from 'rxjs';
-
-import { ProductTypeCode, administrationAction } from 'src/app/shared/model/shared.model';
-
+import { BehaviorSubject, Observable, first, map, of, switchMap,  } from 'rxjs';
+import { Product, ProductTypeCode, administrationAction } from 'src/app/shared/model/shared.model';
 import { ProductsService } from 'src/app/shared/service/products/products.service';
-import { Product } from 'src/app/views/customization/model/customization.model';
 import { adminTitleFormsTranslations } from '../../../model/admin.model';
 import { AbstractUtilsService } from 'src/app/shared/service/utils/abstract-utils.service';
 
@@ -20,7 +17,7 @@ export class DeleteProductFormComponent implements OnInit {
 	enableDeleteSubmitButton$: Observable<boolean> = of(false);
 
 	deleteFormGroup: FormGroup = new FormGroup({});
-	translateTitle: string = adminTitleFormsTranslations[administrationAction.ADD];
+	translateTitle: string = adminTitleFormsTranslations[administrationAction.DELETE];
 
 	constructor(private _formBuilder: FormBuilder, private _productsService: ProductsService, private _utilsService:AbstractUtilsService) {}
 
@@ -39,7 +36,7 @@ export class DeleteProductFormComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Obtiene la lista de productos en funcion del tipo de producto seleccionado
 	 */
 	private _getListOfProducts():Observable<Product[]> {
 		return this.typeProductSelected$.pipe(
@@ -57,7 +54,7 @@ export class DeleteProductFormComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * evento para eliminar producto cuando se hace submit en el boton
 	 */
 	deleteProduct() {
 		const {

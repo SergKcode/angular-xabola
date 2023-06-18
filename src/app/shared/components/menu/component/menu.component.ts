@@ -22,23 +22,34 @@ export class MenuComponent implements OnInit {
 		this.isHomePage$.next(this._router.url === `/${AppRoutes.HOME}`);
 		this._store
 			.select(selectCurrentRoute)
-			.pipe(distinctUntilChanged((prev, curr) =>  {
-				return prev===curr
-			}))
+			.pipe(
+				distinctUntilChanged((prev, curr) => {
+					return prev === curr;
+				})
+			)
 			.subscribe((route) => {
 				const currentRoute = route ? route : this._router.url;
 				this.isHomePage$.next(currentRoute === '/' || currentRoute === '/' + AppRoutes.HOME);
 			});
 	}
 
+	/**
+	 * Función para obtener las tabs del menu
+	 */
 	private _getTabsMenu(): Observable<MenuList[]> {
 		return of(MENU_CONFIG);
 	}
 
+	/**
+	 * Función para redirigir al login page
+	 */
 	goToLoginPage() {
 		this._router.navigate([`/${AppRoutes.LOGIN}`]);
 	}
 
+	/**
+	 * Función para navegar a la ruta seleccionada
+	 */
 	navigateTo(tab: MenuList) {
 		this._router.navigate([`/${tab.route}`]);
 	}

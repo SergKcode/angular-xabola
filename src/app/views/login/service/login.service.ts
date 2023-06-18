@@ -27,6 +27,15 @@ export class LoginService implements AbstractLoginService {
 		);
 	}
 
+	isUserAdmin(): Observable<boolean> {
+		return this._httpClient.get<any>(`${environment.baseUrl}/users/is-admin`).pipe(
+			catchError((error) => {
+				console.log(error);
+				return of(false);
+			})
+		);
+	}
+
 	private _setAccessToken(token: string) {
 		localStorage.setItem('accessToken', token);
 		this.accessToken = token;

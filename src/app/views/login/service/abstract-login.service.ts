@@ -15,4 +15,5 @@ import { StoreModule } from '@ngrx/store';
 export abstract class AbstractLoginService {
 	abstract autenticateUser(credetials:AuthCredential):Observable<any>
 	abstract getAccessToken():string | null
+	abstract isUserAdmin(): Observable<boolean>
 }

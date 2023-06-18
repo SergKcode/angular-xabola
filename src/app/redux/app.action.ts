@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
-import { Container, Extra, Product } from "../views/customization/model/customization.model";
-import { ProductTypes } from "../shared/model/shared.model";
+import { Product, ProductType } from "../shared/model/shared.model";
+
 
 export enum AppActions {
     SAVE_CUSTOM_SELECTION = '[APP STATE]: Saving App customization selection',
@@ -61,7 +61,7 @@ export const getProductTypes = createAction(AppActions.GET_PRODUCT_TYPES)
 /**
  * 
  */
-export const getProductTypesSuccess = createAction(AppActionsSuccess.GET_PRODUCT_TYPES_SUCCESS, props<{ productTypes: ProductTypes[] }>())
+export const getProductTypesSuccess = createAction(AppActionsSuccess.GET_PRODUCT_TYPES_SUCCESS, props<{ productTypes: ProductType[] }>())
 
 /**
  * 

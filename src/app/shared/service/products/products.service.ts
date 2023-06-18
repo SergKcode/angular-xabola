@@ -3,49 +3,46 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AbstractProductsService } from './abstract-products.service';
-import { ProductTypes, ProductTypeCode } from '../../model/shared.model';
-import { Container, Extra, Product } from 'src/app/views/customization/model/customization.model';
+import { Product, ProductType } from '../../model/shared.model';
 
 @Injectable()
 export class ProductsService implements AbstractProductsService {
 	constructor(private _httpClient: HttpClient) {}
 
 	/**
-	 *
-	 *
+	 *Metodo para traer de la bbdd todos los productos
 	 */
-	getAllProducts(): Observable<any[]> {
-		return this._httpClient.get<any>(`${environment.baseUrl}/products`);
+	getAllProducts(): Observable<Product[]> {
+		return this._httpClient.get<Product[]>(`${environment.baseUrl}/products`);
 	}
 
 	/**
-	 *
-	 *
+	 * Metodo para traer de la bbdd todos los productos filtrando por tipo de producto
+	 * @param typeId
 	 */
-	getAllProductsByType(typeId: string): Observable<any[]> {
-		debugger;
-		return this._httpClient.get<any>(`${environment.baseUrl}/products/types/${typeId}`);
+	getAllProductsByType(typeId: string): Observable<Product[]> {
+		return this._httpClient.get<Product[]>(`${environment.baseUrl}/products/types/${typeId}`);
 	}
 
 	/**
-	 *
-	 *
+	 *Metodo para traer de la bbdd todos los tipos de producto
 	 */
-	getProductsTypes(): Observable<ProductTypes[]> {
-		return this._httpClient.get<ProductTypes[]>(`${environment.baseUrl}/products/types`);
+	getProductsTypes(): Observable<ProductType[]> {
+		return this._httpClient.get<ProductType[]>(`${environment.baseUrl}/products/types`);
 	}
 
 	/**
-	 *
-	 *
+	 * Metodo para traer un producto por id
+	 * @param id
 	 */
 	getProduct(id: string): Observable<Product> {
 		return this._httpClient.get<any>(`${environment.baseUrl}/products/${id}`);
 	}
 
 	/**
-	 *
-	 *
+	 * Metodo para crear un nuevo producto
+	 * @param values
+	 * @param file
 	 */
 	createNewProduct(values: { [key: string]: any }, file: File): Observable<Product> {
 		const formData = new FormData();
@@ -56,12 +53,13 @@ export class ProductsService implements AbstractProductsService {
 		formData.append('name', name);
 		formData.append('typeId', typeId);
 
-		return this._httpClient.post<any>(`${environment.baseUrl}/products`, formData);
+		return this._httpClient.post<Product>(`${environment.baseUrl}/products`, formData);
 	}
 
 	/**
-	 *
-	 *
+	 * Metodo para editar un producto
+	 * @param id
+	 * @param values
 	 */
 	editProduct(id: string, values: Partial<Product>): Observable<any> {
 		const { name, value, size } = values;
@@ -73,8 +71,8 @@ export class ProductsService implements AbstractProductsService {
 	}
 
 	/**
-	 *
-	 *
+	 * Metodo para eliminar un producto
+	 * @param id
 	 */
 	deleteProduct(id: string): Observable<any> {
 		return this._httpClient.delete<any>(`${environment.baseUrl}/products/${id}`);

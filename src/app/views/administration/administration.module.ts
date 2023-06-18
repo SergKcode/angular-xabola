@@ -20,7 +20,7 @@ import { UtilsServiceModule } from 'src/app/shared/service/utils/utils.service.m
 		ProductsServiceModule,
 		DeleteProductFormModule,
 		EditProductFormModule,
-    UtilsServiceModule
+		UtilsServiceModule
 	],
 	providers: [ProductsService],
 	exports: [AdministrationComponent]

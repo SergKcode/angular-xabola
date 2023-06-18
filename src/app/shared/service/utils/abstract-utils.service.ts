@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { UtilsService } from './utils.service';
 import { UtilsServiceModule } from './utils.service.module';
 import { Store } from '@ngrx/store';
-import { ProductTypeCode } from '../../model/shared.model';
+import { Product, ProductTypeCode } from '../../model/shared.model';
 import { Observable } from 'rxjs';
-import { Product } from 'src/app/views/customization/model/customization.model';
 import { ProductsService } from '../products/products.service';
 
 @Injectable({

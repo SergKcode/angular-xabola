@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, map, of, switchMap } from 'rxjs';
 import { ProductTypeCode, administrationAction } from 'src/app/shared/model/shared.model';
 import { ProductsService } from 'src/app/shared/service/products/products.service';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/redux/app.state';
 import { AbstractUtilsService } from 'src/app/shared/service/utils/abstract-utils.service';
 import { adminTitleFormsTranslations } from '../../../model/admin.model';
 
@@ -25,11 +23,11 @@ export class CreateProductFormComponent implements OnInit {
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _productsService: ProductsService,
-		private _store: Store<AppState>,
 		private _utilsService: AbstractUtilsService
 	) {}
 
 	ngOnInit(): void {
+		/* Declaramos el formulario reactivo */
 		this.addNewProductForm = this._formBuilder.group({
 			name: this._formBuilder.control('', Validators.required),
 			price: this._formBuilder.control('', Validators.required),
@@ -37,6 +35,7 @@ export class CreateProductFormComponent implements OnInit {
 			type: this._formBuilder.control('', Validators.required)
 		});
 
+		/* Comprobamos el tipo de producto seleccionado  */
 		this.addNewProductForm.get('type')?.valueChanges.subscribe((type) => {
 			const isContainerType = type === ProductTypeCode.CONTAINERS;
 			this._updateSizeControlRequired(isContainerType, this.addNewProductForm);
@@ -51,7 +50,7 @@ export class CreateProductFormComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Función para enviar al backend el body del nuevo producto a crear
 	 */
 	createNewProductSubmit() {
 		const file = this.selectedFile$.getValue();
@@ -60,6 +59,7 @@ export class CreateProductFormComponent implements OnInit {
 			.getProductTypeIdByTypeCode(value.type)
 			.pipe(
 				switchMap((typeId) => {
+					debugger
 					return this._productsService.createNewProduct({ ...value, typeId }, file);
 				})
 			)
@@ -70,23 +70,33 @@ export class CreateProductFormComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Actualiza la validación y el estado de un control de formulario en función de si se requiere o no un tamaño.
+	 * @param isRequired Indica si se requiere un tamaño o no.
+	 * @param formGroup El FormGroup que contiene el control de formulario.
 	 */
 	private _updateSizeControlRequired(isRequired: boolean, formGroup: FormGroup): void {
+		// Obtener una referencia al control de formulario llamado 'size'
 		const sizeControl = formGroup.get('size');
+		// Establecer o borrar la validación según si se requiere o no un tamaño
 		isRequired ? sizeControl?.setValidators(Validators.required) : sizeControl?.clearValidators();
+		// Marcar el control como pendiente
 		sizeControl?.markAsPending();
+		// Actualizar el valor y el estado de validación del control
 		sizeControl?.updateValueAndValidity();
 	}
 
 	/**
-	 *
+	 * Se dispara cuando se produce un cambio en la seleccion de la imagen
 	 */
 	onFileSelected(event: any) {
 		this.selectedFile$.next(event.target.files[0] as File);
 		this.fileLoaded = false;
 	}
 
+	
+	/**
+	 * Función que se dispara cuando se termina de cargar la imagen
+	 */
 	onFileLoad() {
 		this.fileLoaded = true;
 	}

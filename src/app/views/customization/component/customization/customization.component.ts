@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, of, switchMap, combineLatest } from 'rxjs';
-import { first, map, skipWhile, tap } from 'rxjs/operators';
-import { CUSTOMIZATION_LIST_VIEW_CONFIG, MODULE_LITERAL } from '../../model/customization.config';
-import { Container, Extra, Product } from '../../model/customization.model';
+import { map } from 'rxjs/operators';
+import { CUSTOMIZATION_LIST_VIEW_CONFIG } from '../../model/customization.config';
 import { AbstractProductsService } from '../../../../shared/service/products/abstract-products.service';
-import { AppRoutes, GenericObject, ProductTypeCode, ProductTypes } from 'src/app/shared/model/shared.model';
+import { AppRoutes, Product, ProductTypeCode } from 'src/app/shared/model/shared.model';
 import { Store } from '@ngrx/store';
-import { resetCustomSelection, saveCustomSelection } from 'src/app/redux/app.action';
-import { selectCustomizationSelection, selectIsAdmin, selectProductTypes } from 'src/app/redux/app.selector';
+import { resetCustomSelection } from 'src/app/redux/app.action';
+import { selectProductTypes } from 'src/app/redux/app.selector';
 import { Router } from '@angular/router';
 import { AbstractUtilsService } from 'src/app/shared/service/utils/abstract-utils.service';
 
@@ -42,7 +41,7 @@ export class CustomizationComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Funcion de obtención de Ids de productos seleccionados
 	 */
 	private _getSelectedIds() {
 		return this.houseElementsSelected$.pipe(
@@ -53,7 +52,7 @@ export class CustomizationComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Funcion que dibuja el resumen de productos seleccionados por el usuario
 	 */
 	private _buildSelectionResume(product: Product) {
 		if (product) {
@@ -81,14 +80,14 @@ export class CustomizationComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Funcion que obtiene los tipos de productos
 	 */
 	private _getListOfProductTypes(): Observable<any> {
 		return this._store.select(selectProductTypes);
 	}
 
 	/**
-	 *
+	 * Funcion que habilita o desabilita el boton siguiente
 	 */
 	private _disabledButton() {
 		return combineLatest([this.houseElementsSelected$, this.selectionOrder$]).pipe(
@@ -102,7 +101,7 @@ export class CustomizationComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Funcion que devuelve el precio total de los elementos seleccionados
 	 */
 	private _getTotal() {
 		return this.houseElementsSelected$.pipe(
@@ -113,28 +112,7 @@ export class CustomizationComponent implements OnInit {
 	}
 
 	/**
-	 *
-	 */
-	/* 	private _getListOfCustomization(): Observable<Product[]> {
-		return combineLatest([this.productTypes$, this.selectionOrder$]).pipe(
-			switchMap(([productTypes, order]: [ProductTypes[], number]) => {
-				if (productTypes.length) {
-					const productCode =
-						CUSTOMIZATION_LIST_VIEW_CONFIG.find((element) => element.order === order)?.type || 'CO';
-					const idType = (productTypes || []).find((e) => e?.typeCode === productCode)?.id;
-					if (order <= 5 && idType) {
-						return this._customizationService.getAllProductsByType(idType);
-					}
-				}
-
-				return of([]);
-			})
-		);
-	}
- */
-
-	/**
-	 *
+	 * Funcion que devuelve la lista de productos segun el tipo de producto
 	 */
 	private _getListOfCustomization(): Observable<Product[]> {
 		return this.selectionOrder$.pipe(
@@ -154,15 +132,17 @@ export class CustomizationComponent implements OnInit {
 			})
 		);
 	}
+
 	/**
-	 *
+	 * Evento de seleccion de producto
+	 * @param customizationSelection
 	 */
 	selectProductHandler(customizationSelection: Product) {
 		this._buildSelectionResume(customizationSelection);
 	}
 
 	/**
-	 *
+	 * Evento de boton siguiente
 	 */
 	nextHandler() {
 		const currentValue: number = this.selectionOrder$.getValue();
@@ -171,15 +151,16 @@ export class CustomizationComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Evento de cancelación del proceso de seleccón
 	 */
 	cancelSelectionProcess() {
 		this._store.dispatch(resetCustomSelection());
 		this.selectionOrder$.next(1);
 		this.houseElementsSelected$.next([]);
 	}
+	
 	/**
-	 *
+	 * Evento para solicitar contacto
 	 */
 	requestBadget() {
 		this._router.navigateByUrl(`/${AppRoutes.CONTACT}`);

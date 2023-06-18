@@ -32,8 +32,20 @@ export const enum administrationAction {
 	DELETE = 'delete'
 }
 
-export interface ProductTypes {
+
+export interface Product {
 	id: string;
 	name: string;
-	typeCode: ProductTypeCode;
+    size?: number;
+	typeId?: ProductType
+	value: number;
+	image: string | null;
+}
+
+
+export interface ProductType{
+	id:string,
+	name:string
+	typeCode:ProductTypeCode
+
 }

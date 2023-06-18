@@ -16,6 +16,7 @@ export class LayoutComponent implements OnInit {
 	constructor(private _router: Router, private _store: Store) {}
 
 	ngOnInit(): void {
+		//dispatch para almacenar en los estados de redux los tipos de producto disponibles
 		this._store.dispatch(getProductTypes());
 		this.isAdminView$.next(this._router.url === `/${AppRoutes.ADMIN}`);
 		this._router.events.pipe().subscribe((event) => {

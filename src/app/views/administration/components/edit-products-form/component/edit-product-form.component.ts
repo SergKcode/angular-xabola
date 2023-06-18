@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, first, map, of, switchMap, tap } from 'rxjs';
-import { ProductTypeCode, administrationAction } from 'src/app/shared/model/shared.model';
+import { Product, ProductTypeCode, administrationAction } from 'src/app/shared/model/shared.model';
 import { ProductsService } from 'src/app/shared/service/products/products.service';
-import { Product } from 'src/app/views/customization/model/customization.model';
 import { adminTitleFormsTranslations } from '../../../model/admin.model';
 import { AbstractUtilsService } from 'src/app/shared/service/utils/abstract-utils.service';
 
@@ -42,6 +41,7 @@ export class EditProductFormComponent implements OnInit {
 			size: this._formBuilder.control('')
 		});
 
+		// habilita boton submit del formulario cuando todos los valores requeridos estan rellenados
 		this.enableEditSubmitButton$ = this.editProductFormGroup.valueChanges.pipe(
 			map((_) => this.editProductFormGroup.valid)
 		);
@@ -53,7 +53,10 @@ export class EditProductFormComponent implements OnInit {
 		});
 	}
 
-	_getProductToEdit() {
+	/**
+	 * Recupera el producto seleccionado para editarlo
+	 */
+	_getProductToEdit(): Observable<Product | null> {
 		return this.idProductSelected$.pipe(
 			switchMap((id) => {
 				return !id ? of(null) : this._productsService.getProduct(id);
@@ -70,12 +73,11 @@ export class EditProductFormComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Lista de productos por typo de producto seleccionado
 	 */
 	private _getListOfProducts(): Observable<Product[]> {
 		return this.typeProductSelected$.pipe(
 			switchMap((type) => {
-				debugger
 				const productControl = this.editProductFormGroup.get('product');
 				if (!type) {
 					productControl?.disable();
@@ -88,7 +90,7 @@ export class EditProductFormComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Función que establece el campo size como obligatorio si el tipo contenedor es seleccionado
 	 */
 	private _updateSizeControlRequired(isRequired: boolean, formGroup: FormGroup): void {
 		const sizeControl = formGroup.get('size');
@@ -98,7 +100,7 @@ export class EditProductFormComponent implements OnInit {
 	}
 
 	/**
-	 *
+	 * Evento para lanzar patch contra la bbdd
 	 */
 	editProduct() {
 		const { value } = this.editProductFormGroup;

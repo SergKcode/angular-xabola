@@ -12,27 +12,26 @@
 	</select>
 </form>
 
-
 <section class="bg-gray-100 py-8">
 	<ng-container [ngSwitch]="actionSelected$ | async">
-	  <ng-container *ngSwitchCase="'add'">
-		<!-- Componente para la acción de creación -->
-		<app-create-product-form></app-create-product-form>
-	  </ng-container>
-  
-	  <ng-container *ngSwitchCase="'edit'">
-		<!-- Componente para la acción de edición -->
-		<app-edit-product-form ></app-edit-product-form >
-	  </ng-container>
-  
-	  <ng-container *ngSwitchCase="'delete'">
-		<!-- Componente para la acción de eliminación -->
-		<app-delete-product-form ></app-delete-product-form>
-	  </ng-container>
-  
-	  <ng-container *ngSwitchDefault>
-		<!-- Componente por defecto -->
-		<app-create-product-form ></app-create-product-form >
-	  </ng-container>
+		<ng-container *ngSwitchCase="'add'">
+			<!-- Componente para la acción de creación -->
+			<app-create-product-form></app-create-product-form>
+		</ng-container>
+
+		<ng-container *ngSwitchCase="'edit'">
+			<!-- Componente para la acción de edición -->
+			<app-edit-product-form></app-edit-product-form>
+		</ng-container>
+
+		<ng-container *ngSwitchCase="'delete'">
+			<!-- Componente para la acción de eliminación -->
+			<app-delete-product-form></app-delete-product-form>
+		</ng-container>
+
+		<ng-container *ngSwitchDefault>
+			<!-- Componente por defecto -->
+			<app-create-product-form></app-create-product-form>
+		</ng-container>
 	</ng-container>
-  </section>
+</section>

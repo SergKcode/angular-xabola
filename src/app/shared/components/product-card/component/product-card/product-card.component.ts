@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Product } from 'src/app/views/customization/model/customization.model';
-import { StyleProductsStatus } from '../../model/product-card.config';
 import { BehaviorSubject } from 'rxjs';
+import { Product } from 'src/app/shared/model/shared.model';
 
 @Component({
 	selector: 'app-product-card',
@@ -18,16 +16,18 @@ export class ProductCardComponent implements OnChanges, OnInit {
 
 	ids: string[] = [];
 
-	constructor(private _store: Store) {}
+	constructor() {}
 
 	ngOnInit(): void {}
 
+	/**
+	 * evento que emite el producto seleccionado
+	 */
 	productSelectHandler(product: Product) {
 		this.productSelected.emit(product);
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		console.log('1',this.products)
 		if (changes['selectedIdProducts']) {
 			this.ids = this.selectedIdProducts || [];
 		}
@@ -37,6 +37,7 @@ export class ProductCardComponent implements OnChanges, OnInit {
 		}
 	}
 
+	/* Evento de fin de carga de imagen */
 	imageLoaded(product: Product) {
 		const previousImagesLoaded = this.productImagesLoaded$.getValue();
 		this.productImagesLoaded$.next([...previousImagesLoaded, product]);
